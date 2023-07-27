@@ -19,3 +19,4 @@ npm start
 ```
 ## Demo
 ![image](https://github.com/moazfarrukh/react-todolist/assets/21291203/a35d7dfa-54e0-496b-b103-359d6c41a45a)
+![video](https://clipchamp.com/watch/rUMl0Oj1YIA)
