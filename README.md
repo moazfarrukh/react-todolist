@@ -20,3 +20,5 @@ npm start
 ## Demo
 ![image](https://github.com/moazfarrukh/react-todolist/assets/21291203/a35d7dfa-54e0-496b-b103-359d6c41a45a)
 
+https://github.com/moazfarrukh/react-todolist/assets/21291203/93483bc4-e7b0-416c-94ed-2253eb752ce5
+
