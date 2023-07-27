@@ -1,88 +1,97 @@
-// import React, { useState } from "react";
 import { BsListCheck } from "react-icons/bs";
 import "./App.css";
 import { Todo } from "./components/todo";
 import { useState } from "react";
 
 interface todoData {
+  //data stored in each todo
   id: number;
   text: string;
-  done: boolean;
+  completed: boolean;
 }
 
 function App() {
-
-  const [currId,setCurrId]=useState<number>(0);
-
-  const [todoList,setTodoList] = useState<todoData[]>([])
+  //for generating unique id for every new todo
+  const [currId, setCurrId] = useState<number>(0);
   
-  const deleteTodo=(id:number)=>
-  {
-   
-    setTodoList(todoList.filter((todo)=>(todo.id !== id)));
-    
-  }
+  // store data for every todo
+  const [todoDataList, setTodoList] = useState<todoData[]>([]);
 
-  const toggleCheck=(id:number)=>
-  {
-    setTodoList(todoList.map((todo)=>{
-      if(todo.id===id)
-      {
-        return {id:todo.id,text:todo.text,done:!todo.done}
-      }
-      else{
-      return todo;
-      }
-    }));
- 
-  }
-  const updateTodoText=(id:number,newText:string)=>
-  {
-    
-    setTodoList(todoList.map((todo)=>{
-      if(todo.id===id)
-      {
-        return {id:todo.id,text:newText,done:todo.done}
-      }
-      else{
-      return todo;
-      }
-    }));
-    
-  }
+  const deleteTodo = (id: number) => {
+    setTodoList(todoDataList.filter((todo) => todo.id !== id));
+  };
 
-  const addTodo=(todoText:string)=>{
-    const newtodo:todoData =
-    {
-      id:currId,
-      text:todoText,
-      done:false,
-    }
-    setCurrId(currId+1);
-    setTodoList([...todoList,newtodo])
-  }
+  const toggleCheck = (id: number) => {
+    // toggle the status of a todo (completed/unfinished) 
+    setTodoList(
+      todoDataList.map((todo) => {
+        if (todo.id === id) {
+          return { id: todo.id, text: todo.text, completed: !todo.completed };
+        } else {
+          return todo;
+        }
+      })
+    );
+  };
+  const updateTodoText = (id: number, newText: string) => {
+    // updates the text of the todo with the specified id
+    setTodoList(
+      todoDataList.map((todo) => {
+        if (todo.id === id) {
+          return { id: todo.id, text: newText, completed: todo.completed };
+        } else {
+          return todo;
+        }
+      })
+    );
+  };
 
-  
-  const handleTodoInput =(e:React.KeyboardEvent<HTMLInputElement>)=>{
-          
-    if(e.key==="Enter")
-    {
-      if((e.target as HTMLInputElement).value.trim()!==""){
-      addTodo((e.target as HTMLInputElement).value);
-      (e.target as HTMLInputElement).value="";
+  const addTodo = (todoText: string) => {
+    // add data of the new todo to the todoDatalist
+    const newtodo: todoData = {
+      id: currId,
+      text: todoText,
+      completed: false,
+    };
+    //increment the currId to generate unique id for the next todo 
+    setCurrId(currId + 1);
+    // add data of new todo to the todolist
+    setTodoList([...todoDataList, newtodo]);
+  };
+
+  const handleTodoInput = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    //handle enter key press 
+    if (e.key === "Enter") {
+      if ((e.target as HTMLInputElement).value.trim() !== "") {
+        addTodo((e.target as HTMLInputElement).value);
+        (e.target as HTMLInputElement).value = "";
       }
     }
-  }
+  };
 
-  const Todos = todoList.map((todo,index) => {
-    return <Todo key={index} id={todo.id} text={todo.text} done={todo.done as boolean} deleteTodo={deleteTodo} updateTodoText={updateTodoText} toggleCheck={toggleCheck}/>;
+  const Todos = todoDataList.map((todo, index) => {
+    // create todolist components from the data 
+    return (
+      <Todo
+        key={index}
+        id={todo.id}
+        text={todo.text}
+        completed={todo.completed as boolean}
+        deleteTodo={deleteTodo}
+        updateTodoText={updateTodoText}
+        toggleCheck={toggleCheck}
+      />
+    );
   });
-
 
   return (
     <div className="container">
       <h2>Todos</h2>
-      <form onSubmit={(e)=>{e.preventDefault()}}>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+        }}
+      >
         <div className="list-icon">
           <BsListCheck />
         </div>
@@ -90,7 +99,7 @@ function App() {
           placeholder="What do you want to do?"
           className="input-todo"
           type="text"
-        onKeyDown={handleTodoInput}
+          onKeyDown={handleTodoInput}
         />
       </form>
       {Todos}
