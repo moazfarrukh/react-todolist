@@ -17,8 +17,19 @@ function App() {
   // store data for every todo
   const [todoDataList, setTodoList] = useState<todoData[]>([]);
 
+  const [tasksDone,setTasksDone]= useState<number>(0);
+
   const deleteTodo = (id: number) => {
-    setTodoList(todoDataList.filter((todo) => todo.id !== id));
+    setTodoList(todoDataList.filter((todo) => {
+      if(id===todo.id)
+      {
+        if(todo.completed)
+        {
+        setTasksDone(tasksDone-1);    
+        }
+      }
+
+      return todo.id !== id}));
   };
 
   const toggleCheck = (id: number) => {
@@ -26,6 +37,13 @@ function App() {
     setTodoList(
       todoDataList.map((todo) => {
         if (todo.id === id) {
+          if(todo.completed)
+          {
+            setTasksDone(tasksDone-1);
+          }
+          else{
+            setTasksDone(tasksDone+1);
+          }
           return { id: todo.id, text: todo.text, completed: !todo.completed };
         } else {
           return todo;
@@ -71,6 +89,7 @@ function App() {
 
   const Todos = todoDataList.map((todo, index) => {
     // create todolist components from the data 
+    
     return (
       <Todo
         key={todo.id}
@@ -103,6 +122,8 @@ function App() {
         />
       </form>
       {Todos}
+      <span className ="todo-bottom todo-num ">Total: {todoDataList.length}</span>
+      <span className="todo-bottom todo-done">Completed: {tasksDone}</span>
     </div>
   );
 }

@@ -20,9 +20,8 @@ list-style: none;
   background-color: #3c424a;
   position: relative;
   padding: 2rem;
-
   box-shadow: 0 5px 8px rgba(0,0,0,0.6);
-  color:white
+  color:white;
 }
 
 h2{
@@ -54,3 +53,14 @@ form{
   margin-top: 4px;
 }
 
+.todo-bottom{
+position: absolute;
+bottom: 10px;
+}
+.todo-done{
+  right: 10px;
+}
+
+.todo-num{
+  left: 10px;
+}
