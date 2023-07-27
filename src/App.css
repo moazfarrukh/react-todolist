@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow&family=Lato:wght@900&family=Roboto&display=swap');
+*{
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+background: radial-gradient(circle, #eeaeca, #94bbe9);
+height:100vh;
+display: flex;
+justify-content: center;
+align-items: center;
+font-family: barlow,sans-serif;
+list-style: none;
+}
+
+.container{
+  width: 400px;
+  min-height: 500px;
+  background-color: #3c424a;
+  position: relative;
+  padding: 2rem;
+
+  box-shadow: 0 5px 8px rgba(0,0,0,0.6);
+  color:white
+}
+
+h2{
+    padding-left:40%;
+    margin-bottom: 10px;
+}
+
+
+
+form{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background-color: #343a40;
+  gap:15px ;
+  padding: 7px;
+  margin-bottom: 10px ;
+  color:white;
+}
+.input-todo{
+  background-color: transparent;  
+  border:none;
+  outline: none;
+  color: white;
+  width: 100%;
+}
+.list-icon{
+  font-size: 20px;
+  margin-top: 4px;
+}
+
