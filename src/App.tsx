@@ -73,7 +73,7 @@ function App() {
     // create todolist components from the data 
     return (
       <Todo
-        key={index}
+        key={todo.id}
         id={todo.id}
         text={todo.text}
         completed={todo.completed as boolean}
