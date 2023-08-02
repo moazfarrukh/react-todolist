@@ -1,11 +1,14 @@
 import React from 'react'
 import { BsTrash } from "react-icons/bs";
+import { TodoFuncContext} from '../../context/TodoContext';
+import {useContext} from 'react'
+import { todoFuncContextType } from '../../types/Todo';
 interface todoDeleteProps{
-    id:number,
-    deleteTodo: (id: number) => void;
-
+    id:number;
 }
-function TodoDelete({id,deleteTodo}:todoDeleteProps) {
+function TodoDelete({id}:todoDeleteProps) {
+  const {deleteTodo} = useContext(TodoFuncContext) as todoFuncContextType;
+
   return (
     <div
     className="todo-delete"

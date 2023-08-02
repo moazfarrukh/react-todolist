@@ -1,9 +1,10 @@
 import { useState } from "react";
 
 import { Todo } from "../components/TodoList/Todo";
-import { todoData } from "../types/Todo";
+import { todoFuncContextType, todoData } from "../types/Todo";
 import { removeTodo, updateTodoProperty } from "../utils/Todo";
 import TodoInput from "../components/TodoList/TodoInput";
+import { TodoFuncContext } from "../context/TodoContext";
 
 import "../styles/TodoList.css";
 
@@ -35,6 +36,8 @@ function TodoList() {
     setTodoList(updateTodoProperty(todoDataList, id, "text", newText));
   };
 
+  const value:todoFuncContextType= {updateText:updateTodoText,updateCheck:UpdateTodoCheck,deleteTodo:deleteTodoFromList}
+
   const addTodo = (todoText: string) => {
     // add data of the new todo to the todoDatalist
     const newtodo: todoData = {
@@ -55,9 +58,6 @@ function TodoList() {
         id={todo.id}
         text={todo.text}
         completed={todo.completed as boolean}
-        deleteTodo={deleteTodoFromList}
-        updateTodoText={updateTodoText}
-        toggleCheck={UpdateTodoCheck}
       />
     );
   });
@@ -66,7 +66,9 @@ function TodoList() {
     <div className="container">
       <h2>Todos</h2>
       <TodoInput addTodo={addTodo} />
+      <TodoFuncContext.Provider value={value}>
       {Todos}
+      </TodoFuncContext.Provider>
       <span className="todo-bottom todo-num ">
         Total: {todoDataList.length}
       </span>

@@ -1,17 +1,21 @@
-import React from 'react'
+import {useContext} from 'react'
+import { TodoFuncContext } from '../../context/TodoContext'
+import { todoFuncContextType} from '../../types/Todo'
+
 interface TodoCheckProps{
     id:number,
     completed:boolean,
-    toggleCheck: (id: number,checked:boolean) => void;
-
 }
-function TodoCheck({id,completed,toggleCheck}:TodoCheckProps) {
+
+function TodoCheck({id,completed}:TodoCheckProps) {
+  const {updateCheck} = useContext(TodoFuncContext) as todoFuncContextType;
+
   return (
     <input
       type="checkbox"
       defaultChecked={completed}
       onChange={() => {
-        toggleCheck(id,completed);
+        updateCheck(id,completed);
       }}
       className="todo-check"
     />

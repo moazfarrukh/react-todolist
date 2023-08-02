@@ -1,34 +1,29 @@
 import TodoText from "./TodoText";
 import TodoCheck from "./TodoCheck";
 import TodoDelete from "./TodoDelete";
-
+import { createContext } from "react";
+import { todoDataContextType } from "../../types/Todo";
 interface todoProps {
   id: number;
   text: string;
   completed: boolean;
-  toggleCheck: (id: number, checked: boolean) => void;
-  deleteTodo: (id: number) => void;
-  updateTodoText: (id: number, newText: string) => void;
 }
 
 export const Todo = ({
   id,
   text,
   completed,
-  deleteTodo,
-  updateTodoText,
-  toggleCheck,
 }: todoProps) => {
+  const value:todoDataContextType = {id,text,completed} 
+  const TodoDataContext = createContext<todoDataContextType| null>(null);
+
   return (
     <div className="todo">
-      <TodoCheck id={id} completed={completed} toggleCheck={toggleCheck} />
-      <TodoText
-        id={id}
-        completed={completed}
-        text={text}
-        updateTodoText={updateTodoText}
-      />
-      <TodoDelete id={id} deleteTodo={deleteTodo} />
+      <TodoDataContext.Provider  value={value} > 
+      <TodoCheck id={id} completed={completed}/>
+      <TodoText id={id} completed={completed} text={text}/>
+      <TodoDelete  id={id}/>
+      </TodoDataContext.Provider>
     </div>
   );
 };
